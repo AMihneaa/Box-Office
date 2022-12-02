@@ -9,9 +9,12 @@ import { apiGet } from '../misc/config';
 const Home = () => {
   const [input, setInput] = useState('');
   const [results, setResults] = useState(null);
+  const [searchOption, setSearchOption] = useState('shows');
+
+  const isShowSearch = searchOption === 'shows';
 
   const onSearch = () => {
-    apiGet(`/search/shows?q=${input}`).then(result => {
+    apiGet(`/search/${searchOption}?q=${input}`).then(result => {
       setResults(result);
     });
   };
@@ -32,16 +35,20 @@ const Home = () => {
     }
 
     if (results && results.length > 0) {
-      return (
-        <div>
-          {results.map(item => {
+      return results[0].show
+        ? results.map(item => {
             return <div key={item.show.id}>{item.show.name}</div>;
-          })}
-        </div>
-      );
+          })
+        : results.map(item => {
+            return <div key={item.person.id}>{item.person.name}</div>;
+          });
     }
 
     return null;
+  };
+
+  const onRadioChange = ev => {
+    setSearchOption(ev.target.value);
   };
 
   return (
@@ -50,8 +57,34 @@ const Home = () => {
         type="text"
         onChange={onInputChange}
         onKeyDown={onKeyDown}
+        placeholder="Search for something"
         value={input}
       />
+
+      <div>
+        <label htmlFor="shows-search">
+          Shows
+          <input
+            id="shows-search"
+            type="radio"
+            value="shows"
+            onChange={onRadioChange}
+            checked={isShowSearch}
+          />
+        </label>
+
+        <label htmlFor="actors-search">
+          Actors
+          <input
+            id="actors-search"
+            type="radio"
+            value="people"
+            onChange={onRadioChange}
+            checked={!isShowSearch}
+          />
+        </label>
+      </div>
+
       <button type="button" onClick={onSearch}>
         Search
       </button>
