@@ -6,9 +6,12 @@ import ShowCard from './ShowCard';
 //Import Images
 import IMAGE_NOT_FOUND from '../../images/not-found.png';
 
+//Import Styles Components
+import { FlexGrid } from '../Style';
+
 const ShowGrid = ({ data }) => {
   return (
-    <div>
+    <FlexGrid>
       {data.map(({ show }) => (
         <ShowCard
           key={show.id}
@@ -18,7 +21,7 @@ const ShowGrid = ({ data }) => {
           summary={show.summary}
         />
       ))}
-    </div>
+    </FlexGrid>
   );
 };
 

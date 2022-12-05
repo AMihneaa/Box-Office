@@ -6,9 +6,12 @@ import ActorCard from './ActorCard';
 //Import Images
 import IMAGE_NOT_FOUND from '../../images/not-found.png';
 
+//Import Styled Components
+import { FlexGrid } from '../Style';
+
 const ActorGrid = ({ data }) => {
   return (
-    <div>
+    <FlexGrid>
       {data.map(({ person }) => {
         return (
           <ActorCard
@@ -22,7 +25,7 @@ const ActorGrid = ({ data }) => {
           />
         );
       })}
-    </div>
+    </FlexGrid>
   );
 };
 
