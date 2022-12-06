@@ -40,7 +40,7 @@ const Home = () => {
       return results[0].show ? (
         <ShowGrid data={results} />
       ) : (
-        <ActorGrid data={result} />
+        <ActorGrid data={results} />
       );
     }
 

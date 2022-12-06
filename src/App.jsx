@@ -6,6 +6,7 @@ import { Switch, Route } from 'react-router-dom';
 //Import Pages Component
 import Home from './Pages/Home';
 import Starred from './Pages/Starred';
+import Show from './Pages/Show';
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
 
         <Route exact={true} path={'/starred'}>
           <Starred />
+        </Route>
+
+        <Route exact={true} path={`/show/:id`}>
+          <Show />
         </Route>
 
         <Route>
